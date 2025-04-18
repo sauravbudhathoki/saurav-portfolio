@@ -15,10 +15,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // Skill Progress Animation
     document.querySelectorAll('.skill-card').forEach(card => {
         const progress = card.dataset.skill + '%';
-        card.querySelector('.progress-bar').style.width = progress;
+        const bar = card.querySelector('.progress-bar');
+        bar.style.width = progress;
+        bar.style.transition = 'width 1s ease-in-out';
     });
 
-    // Form Loading Animation
+    // Contact Form Loading Animation
     const contactForm = document.getElementById('contactForm');
     contactForm.addEventListener('submit', (e) => {
         const btn = contactForm.querySelector('button');
@@ -27,22 +29,32 @@ document.addEventListener('DOMContentLoaded', () => {
         btn.querySelector('.loading-dots').style.display = 'flex';
     });
 
-    // Mobile Menu
+    // Mobile Menu Toggle
     const hamburger = document.querySelector('.hamburger');
     const navLinks = document.querySelector('.nav-links');
-    
+
     hamburger.addEventListener('click', () => {
         navLinks.classList.toggle('active');
         hamburger.classList.toggle('active');
     });
 
-    // Smooth scrolling
+    // Smooth Scrolling
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
-            });
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+
+            // Close menu on mobile after click
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
         });
     });
 });
