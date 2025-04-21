@@ -5,7 +5,7 @@ document.getElementById('contact-form').addEventListener('submit', function(even
     const formData = new FormData(this);
 
     // Send AJAX request to backend
-    fetch('http://localhost:8080/send-contact-email', { // Make sure this is the correct backend URL
+    fetch('http://localhost:8080/send-contact-email', { // Replace with your backend URL
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
